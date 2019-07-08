@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,20 +19,27 @@ export class AppComponent {
     },
     {
       title: 'Bookings',
-      url: '/list',
+      url: '/bookings',
       icon: 'checkbox-outline'
     },
     {
       title: 'Logout',
-      url: '/list',
+      url: '/auth',
       icon: 'log-out'
     }
   ];
 
+  onLogout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/auth');
+  }
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private router: Router,
+    private authService: AuthService
   ) {
     this.initializeApp();
   }
